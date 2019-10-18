@@ -68,16 +68,16 @@ By default the Sonoff will have a Enabled state at power on, you can change this
  5) make sure no other serial devices are connected! and then run esptool.py erase_flash
  3) Run the `flash.sh` script 
 
-### Add Sonoff to Home app
+### Add Plug to Home app
  1) Connect your iPhone or iPad to the new wifi network `Brillo-xxx`
  2) Wait for the Captive Portal and select your WiFi network
  3) Insert your WiFi Password
  4) Open the `Home` app
  5) Click the `+` symbol
  6) Click `I don't have the code...`
- 7) Select the Sonoff-xxx Switch 
- 7.1 If the Sonoff-xxx does not appear on top of the page try to press the sonoff button a couple of times and kill the Home App
- 9) Confirm that you want to add the Sonoff
+ 7) Select the Brillo-xxx Switch 
+ 7.1 If the Brillo-xxx does not appear on top of the page wait a minute or kill the Home App
+ 9) Confirm that you want to add the plug
  10) Insert the Password that is `123-45-678`
 
 Done! 
