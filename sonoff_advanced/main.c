@@ -19,6 +19,10 @@
  * connected to the FTDI adapter! This may fry your
  * computer and sonoff.
  *
+ * This is a version to suit some revisions of the ' Brilliant
+ * Smart Wifi Plug with USB' , available from Bunnings
+ * in Australia
+ *
  */
 
 #include <stdio.h>
