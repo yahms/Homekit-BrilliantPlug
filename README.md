@@ -1,4 +1,4 @@
-*This is incomplete currently*
+*This doesnt work yet, is a placeholder till i upload working firmware*
 
 # 'Brilliant Smart WiFi Plug' with Homekit
 
