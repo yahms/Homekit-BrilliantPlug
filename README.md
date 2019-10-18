@@ -38,7 +38,7 @@ what you need:
 
 
  <img src="https://raw.githubusercontent.com/Gruppio/Sonoff-Homekit/images/images/homekit.png" alt="Works with Apple Homekit" width="180"/>
- <img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/blob/master/resize.jpg" alt="This"/>
+ <img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/master/resize.jpg" alt="This"/>
 
 
 
