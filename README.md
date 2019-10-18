@@ -5,24 +5,14 @@
 The 'Brilliant Smart WiFi Plug' available from Bunnings or Officeworks in Australia is an ESP8266 / Tuya based smart plug. Thanks to the work of TBA and TBA, a full homekit implementation can be loaded on these if you are handy with electronics.
 
 This project makes the **Bunnings 'Brilliant Smart WiFi Plug** compatible with **Apple Homekit**!
-
-As per TBA's project, this firmware doesn't require anything else running in order to work. It is not based on the Tasmota Fw, you don't need HomeBridge running on a Raspberry-Pi or an MQTT server, since HomeKit runs natively just like any other homekit device from the shops.
+<img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/master/resize.jpg" alt="This"/>
+<img src="https://raw.githubusercontent.com/Gruppio/Sonoff-Homekit/images/images/homekit.png" alt="Works with Apple Homekit" width="180"/>
+ 
+As per Gruppio's project, this firmware doesn't require anything else running in order to work. It is not based on the Tasmota Fw, you don't need HomeBridge running on a Raspberry-Pi or an MQTT server, since HomeKit runs natively just like any other homekit device from the shops.
 
 The implementation uses Apple provided specifications for device makers, so it should keep working for a long time.
 
 This also means there is a cheap HomeKit smart plug available for Australian users (since in australia regulations require Live and Neutral switching - a normal SonOff only switches live). Should be idiot proof?
-
-How it works:
-
-On power up it will try to connect to the configured wifi. if this isnt configured or is unavailable, it will launch a wifi hotspot that you can join and configure which wifi to join.
-
-Once joined to your home wifi, you can add inside the Apple Home app. Press 'cant scan' and enter the code 123-45-678
-
-Pressing the button on teh device should switch, but thats broken currently
-
-Long pressing the buttin should also do something (like reset wifi config, but also thats broken)
-
-Pic of smart plug here.
 
 what you need:
 
@@ -35,10 +25,6 @@ what you need:
 
 
 
-
-
- <img src="https://raw.githubusercontent.com/Gruppio/Sonoff-Homekit/images/images/homekit.png" alt="Works with Apple Homekit" width="180"/>
- <img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/master/resize.jpg" alt="This"/>
 
 
 
