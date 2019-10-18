@@ -1,8 +1,8 @@
 *This is incomplete currently*
 
-# Bunnings 'Brilliant Smart WiFi Plug' with Homekit
+# 'Brilliant Smart WiFi Plug' with Homekit
 
-The 'Brilliant Smart WiFi Plug' available from Bunnings in Australia is an ESP8266 / Tuya based smart plug. Thanks to the work of TBA and TBA, a full homekit implementation can be loaded on these if you are handy with electronics.
+The 'Brilliant Smart WiFi Plug' available from Bunnings or Officeworks in Australia is an ESP8266 / Tuya based smart plug. Thanks to the work of TBA and TBA, a full homekit implementation can be loaded on these if you are handy with electronics.
 
 This project makes the **Bunnings 'Brilliant Smart WiFi Plug** compatible with **Apple Homekit**!
 
