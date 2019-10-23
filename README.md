@@ -67,6 +67,7 @@ i figure you can always get it joining wifi coz if it cant find the configured w
  2) remove the board with 2 more smaller screws
  3) solder 3v3,GND,RX and TX wires to the chip and connect wires to a serial adapter @ 3.3v
 <img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/master/TYWE2S2.jpeg" alt="This"/>
+
  4) boot up in bootloader mode by shorting IO0 pad to ground
  5) make sure no other serial devices are connected! and then run esptool.py erase_flash
  6) Run the `flash.sh` script 
