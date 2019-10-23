@@ -1,4 +1,4 @@
-*This doesnt work yet, is a placeholder till i upload working firmware*
+
 
 # 'Brilliant Smart WiFi Plug' with Homekit
 
@@ -19,19 +19,15 @@ what you need:
 * an apple iphone or ipad though you knew that already didnt you, right?
 * wifi at home
 * Smart plug
-* 3.3v serial adapter (example pic)
-* wires (example pic)
+* 3.3v serial adapter
+* wires
 * Soldering iron
-
-
-
-
 
 
 ### Compatible Devices
 This Software is currently tested on: 
 
-
+Brillo Smart Wifi Plug with USB
 
 ---
 
@@ -47,14 +43,20 @@ A full set of Rest APIs are available:
 * **/toggle**
 * **/state**
 
-All the request are in **GET** and are relative to the IP address of the Sonoff.
-In order to turn on the Sonoff at IP 192.168.0.22 you can: `$ curl 192.168.0.22/on`
+All the request are in **GET** and are relative to the IP address of the plug
+In order to turn on the plug at IP 192.168.0.22 you can: `$ curl 192.168.0.22/on`
 
 ### AutoReconnect after power outage
 A problem with the old firmware was that after a power outage the Sonoff was immediately searching for the stored WIFI connection, but since the router was still powering on the Sonoff was prompting the configuration procedure. Now this problem is fixed, if the Sonoff does not have a WIFI Connection every 10min the Sonoff will restart.
 
-### Selectable PowerOn state
-By default the Sonoff will have a Enabled state at power on, you can change this by selecting "OFF" in the `flash.sh` script
+### unSelectable PowerOn state
+it defaults to on. let me know in issues if u need a default-off
+
+
+### touch-free easy config wipe
+in the absence of a button its hard to reset the wifi/homekit config, so you can go to "/resetconfig" and it will wipe the config including wifi details instantly
+
+i figure you can always get it joining wifi coz if it cant find the configured wifi it should go to AP mode after a while
 
 ---
 
@@ -63,10 +65,10 @@ By default the Sonoff will have a Enabled state at power on, you can change this
 ### Flash the Sonoff
  1) pull apart the bunnings plug (remove the 2 screw covers, then pry open the plate.)
  2) remove the board with 2 more smaller screws
- 2) solder 4 wires to the chip and connect wires to a serial adapter @ 3.3v
+ 3) solder 4 wires to the chip and connect wires to a serial adapter @ 3.3v
  4) boot up in bootloader mode by shorting IO0 to ground
  5) make sure no other serial devices are connected! and then run esptool.py erase_flash
- 3) Run the `flash.sh` script 
+ 6) Run the `flash.sh` script 
 
 ### Add Plug to Home app
  1) Connect your iPhone or iPad to the new wifi network `Brillo-xxx`
@@ -83,6 +85,13 @@ By default the Sonoff will have a Enabled state at power on, you can change this
 Done! 
 
 
+---
+
+## bugs and issues
+
+1) any reset or removal of wifi network will trigger a reboot, which will reset the relay state to the default. i would love to set it to just re-sttempt wifi connection rather than a full restart
+2) the button definately doesnt work , likely because the Brilliant wires the button to GPIO14 and either the ESP or esp-rtos doesnt like interrupts on high gpio numbers ( i tested on a wemos d1 mini and an interrupt/button press on gpio2 worked fine )
+3) the dodgy /resetconfig button workaround is definately a denial of service attack surface
 
 ---
 
