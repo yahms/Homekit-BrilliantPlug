@@ -1,7 +1,5 @@
 #!/bin/bash
 
-POWERON_STATE="ON" # Change this to "OFF" if you want that your Sonoff will be OFF when powered 
-
 SONOFF_PORT="/dev/cu.wchusbserial14310"
 
 esptool.py \
@@ -13,4 +11,4 @@ esptool.py \
             -ff 40m \
             0x0 ./firmware/rboot.bin \
             0x1000 ./firmware/blank_config.bin \
-            0x2000 ./firmware/Sonoff_$POWERON_STATE.bin
+            0x2000 ./firmware/BunningsPlug.bin
