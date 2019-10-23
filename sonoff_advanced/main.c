@@ -1,4 +1,9 @@
 /*
+
+customised for bunnings wifi plug
+
+note GPIO pins and such 
+
  * Example of using esp-homekit library to control
  * a simple $5 Sonoff Basic using HomeKit.
  * The esp-wifi-config library is also used in this
@@ -18,10 +23,6 @@
  * WARNING: Do not connect the sonoff to AC while it's
  * connected to the FTDI adapter! This may fry your
  * computer and sonoff.
- *
- * This is a version to suit some revisions of the ' Brilliant
- * Smart Wifi Plug with USB' , available from Bunnings
- * in Australia
  *
  */
 
@@ -44,14 +45,14 @@
 #include "poweronstate.h"
 
 #define NO_CONNECTION_WATCHDOG_TIMEOUT 600000
-// The GPIO pin that is connected to last pin of the programming strip of the Sonoff Basic.
-const int pin_gpio = 14;
-// The GPIO pin that is connected to the relay on the Sonoff Basic.
-const int relay_gpio = 12;
-// The GPIO pin that is connected to the LED on the Sonoff Basic.
-const int led_gpio = 13;
-// The GPIO pin that is oconnected to the button on the Sonoff Basic.
-const int button_gpio = 0;
+// not used on the bunnings plug but here from the source, so ill leave it
+const int pin_gpio = 13;
+// The GPIO pin that is connected to the relay on the Brilliant (5)
+const int relay_gpio = 5;
+// The GPIO pin that is connected to the RED led
+const int led_gpio = 12;
+// The GPIO pin that is connected to the button (14)
+const int button_gpio = 14;
 
 bool is_connected_to_wifi = false;
 void switch_on_callback(homekit_characteristic_t *_ch, homekit_value_t on, void *context);
@@ -179,21 +180,21 @@ void create_wifi_connection_watchdog() {
     xTaskCreate(wifi_connection_watchdog_task, "Wifi Connection Watchdog", 128, NULL, 3, NULL);
 }
 
-homekit_characteristic_t name = HOMEKIT_CHARACTERISTIC_(NAME, "Sonoff Switch");
+homekit_characteristic_t name = HOMEKIT_CHARACTERISTIC_(NAME, "Brilliant Smart WiFi Plug");
 
 homekit_accessory_t *accessories[] = {
     HOMEKIT_ACCESSORY(.id=1, .category=homekit_accessory_category_switch, .services=(homekit_service_t*[]){
         HOMEKIT_SERVICE(ACCESSORY_INFORMATION, .characteristics=(homekit_characteristic_t*[]){
             &name,
-            HOMEKIT_CHARACTERISTIC(MANUFACTURER, "Gruppio"),
+            HOMEKIT_CHARACTERISTIC(MANUFACTURER, "yahms"),
             HOMEKIT_CHARACTERISTIC(SERIAL_NUMBER, "037A2BABF19D"),
-            HOMEKIT_CHARACTERISTIC(MODEL, "Basic"),
+            HOMEKIT_CHARACTERISTIC(MODEL, "Homekit all the things"),
             HOMEKIT_CHARACTERISTIC(FIRMWARE_REVISION, "1.0.0"),
             HOMEKIT_CHARACTERISTIC(IDENTIFY, switch_identify),
             NULL
         }),
         HOMEKIT_SERVICE(SWITCH, .primary=true, .characteristics=(homekit_characteristic_t*[]){
-            HOMEKIT_CHARACTERISTIC(NAME, "Sonoff Switch"),
+            HOMEKIT_CHARACTERISTIC(NAME, "Brilliant Smart WiFi Plug"),
             &switch_on,
             NULL
         }),
@@ -204,7 +205,7 @@ homekit_accessory_t *accessories[] = {
 
 homekit_server_config_t config = {
     .accessories = accessories,
-    .password = "111-11-111"
+    .password = "123-45-678"
 };
 
 int32_t ssi_handler(int32_t iIndex, char *pcInsert, int32_t iInsertLen)
@@ -251,6 +252,12 @@ char *state_cgi_handler(int iIndex, int iNumParams, char *pcParam[], char *pcVal
     return "/state.ssi";
 }
 
+char *configreset_cgi_handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
+{
+    reset_configuration();
+    return "/ok.html";
+}
+
 void httpd_task(void *pvParameters)
 {
     tCGI pCGIs[] = {
@@ -258,7 +265,8 @@ void httpd_task(void *pvParameters)
         {"/on", (tCGIHandler) on_cgi_handler},
         {"/off", (tCGIHandler) off_cgi_handler},
         {"/toggle", (tCGIHandler) toggle_cgi_handler},
-        {"/state", (tCGIHandler) state_cgi_handler}
+        {"/state", (tCGIHandler) state_cgi_handler},
+        {"/resetconfig", (tCGIHandler) configreset_cgi_handler}
     };
 
     const char *pcConfigSSITags[] = {
@@ -283,10 +291,10 @@ void create_accessory_name() {
     uint8_t macaddr[6];
     sdk_wifi_get_macaddr(STATION_IF, macaddr);
     
-    int name_len = snprintf(NULL, 0, "Sonoff Switch-%02X%02X%02X",
+    int name_len = snprintf(NULL, 0, "Brillo-%02X%02X%02X",
                             macaddr[3], macaddr[4], macaddr[5]);
     char *name_value = malloc(name_len+1);
-    snprintf(name_value, name_len+1, "Sonoff Switch-%02X%02X%02X",
+    snprintf(name_value, name_len+1, "Brillo-%02X%02X%02X",
              macaddr[3], macaddr[4], macaddr[5]);
     
     name.value = HOMEKIT_STRING(name_value);
@@ -297,7 +305,7 @@ void user_init(void) {
 
     create_accessory_name();
     
-    wifi_config_init("sonoff-switch", NULL, on_wifi_ready);
+    wifi_config_init("Brillo", NULL, on_wifi_ready);
     gpio_init();
 
     if (button_create(button_gpio, 0, 4000, button_callback)) {
