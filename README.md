@@ -63,8 +63,8 @@ i figure you can always get it joining wifi coz if it cant find the configured w
 ## Installation Instructions
 
 ### Flash the Sonoff
- 1) pull apart the bunnings plug (remove the 2 screw covers, then pry open the plate.)
- 2) remove the board with 2 more smaller screws
+ 1) pull apart the bunnings plug (remove the 2 screw covers, screws, then pry open the plate.)
+ 2) remove the 2 more smaller screws, then board
  3) solder 3v3,GND,RX and TX wires to the chip and connect wires to a serial adapter @ 3.3v
 <img src="https://raw.githubusercontent.com/yahms/Homekit-BrilliantPlug/master/TYWE2S2.jpeg" alt="This"/>
 
@@ -98,10 +98,12 @@ Done!
 ---
 
 #### Special thanks to:
+@Superhouse
 @maximkulkin
 @gruppio
 
 This project would not have existed without:
+https://github.com/SuperHouse/esp-open-rtos
 https://github.com/maximkulkin/esp-homekit
 https://github.com/maximkulkin/esp-homekit-demo
 https://github.com/maximkulkin/esp-wifi-config
